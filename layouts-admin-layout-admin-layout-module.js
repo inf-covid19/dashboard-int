@@ -64256,7 +64256,7 @@ var MapchartComponent = /** @class */ (function () {
         this.lineStrongerBorderColor = '#1d1d1da8';
         // lineStrongerBorderColor = 'rgb(0,0,0,0.87)';
         this.colorText = '#1d1d1da8';
-        this.slopeLabels = ['Queda', 'Aprox. o mesmo', 'Ascenção (pequena)', 'Ascenção (média)', 'Ascenção (alta)', 'Poucos casos'];
+        this.slopeLabels = ['Decrease', 'Nearly the same', 'Low increase', 'Medium increase', 'High increase', 'Few cases'];
         this.population = { total: 0 };
         this.counts = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000,
             2000000, 5000000, 10000000, 20000000, 50000000, 100000000, 200000000, 500000000,
@@ -64324,6 +64324,7 @@ var MapchartComponent = /** @class */ (function () {
                 .attr('class', 'axis axis--grid')
                 .attr('transform', 'translate(0,' + height + ')')
                 .call(d3__WEBPACK_IMPORTED_MODULE_1__["axisBottom"](x)
+                // .ticks(d3.timeDay, 7)
                 .ticks(d3__WEBPACK_IMPORTED_MODULE_1__["timeHour"], 24)
                 .tickSize(-height)
                 .tickFormat(function () { return null; }))
@@ -64746,7 +64747,7 @@ var MapchartComponent = /** @class */ (function () {
                 var labelTot = '';
                 var qtyTotal = (typeof TotalReport.get(d.properties.UF_05) === 'undefined' ? 0 : self.formatValueSeperator(TotalReport.get(d.properties.UF_05)));
                 if (byDensity === true) {
-                    labelTot = 'Incidência cases';
+                    labelTot = 'Cases per 100,000';
                 }
                 else {
                     labelTot = 'Total cases';
@@ -64754,13 +64755,13 @@ var MapchartComponent = /** @class */ (function () {
                 var labelTotDeath = '';
                 var qtyTotalDeath = (typeof TotalDeathReport.get(d.properties.UF_05) === 'undefined' ? 0 : self.formatValueSeperator(TotalDeathReport.get(d.properties.UF_05)));
                 if (byDensity === true) {
-                    labelTotDeath = 'Incidência óbitos';
+                    labelTotDeath = 'Deaths per 100,000';
                 }
                 else {
                     labelTotDeath = 'Total deaths';
                 }
                 return ('<div style="opacity:0.8;background-color:#253494;padding:7px;color:white">' +
-                    '<text>Estado: </text><text style="font-weight: 800">' +
+                    '<text>State: </text><text style="font-weight: 800">' +
                     d.properties.NOME_UF +
                     '</text><br/>' +
                     '<text>' + labelTot + ': </text><text style="font-weight: 800">' +
@@ -64858,10 +64859,10 @@ var MapchartComponent = /** @class */ (function () {
             d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#total-country').html(self.formatValueSeperator(self.totalCountry));
             d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#total-country-deaths').html(self.formatValueSeperator(self.totalDeathCountry));
             if (byDensity === true) {
-                d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#name-total-country').html('Incidência Brazil');
+                d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#name-total-country').html('Brasil per 100,000');
             }
             else {
-                d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#name-total-country').html('Cases Brazil');
+                d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#name-total-country').html('Cases Brasil');
             }
             var statesRankingElmnt = d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#states-ranking');
             statesRankingElmnt.selectAll('*').remove();
@@ -65081,12 +65082,12 @@ var MapchartComponent = /** @class */ (function () {
                 d3__WEBPACK_IMPORTED_MODULE_1__["select"](this).attr('stroke', self.lineStrongerBorderColor);
                 d3__WEBPACK_IMPORTED_MODULE_1__["select"](this).attr('stroke-width', 3);
                 // d3.select(this).attr('stroke', '#ED881A');
-                var labelTot = byDensity === true ? 'Incidência cases' : 'Total cases';
-                var labelTotDeath = byDensity === true ? 'Incidência deaths' : 'Total deaths';
+                var labelTot = byDensity === true ? 'Cases per 100,000' : 'Total cases';
+                var labelTotDeath = byDensity === true ? 'Deaths per 100,000' : 'Total deaths';
                 return (
                 // '<div style="opacity:0.8;background-color:#8b0707;padding:7px;color:white">' +
                 '<div style="opacity:0.8;background-color:#253494;padding:7px;color:white">' +
-                    '<text>Município: </text><text style="font-weight: 800">' +
+                    '<text>City: </text><text style="font-weight: 800">' +
                     d.properties.NOME_MUNI +
                     '</text><br/>' +
                     '<text>' + labelTot + ': </text><text style="font-weight: 800">' +
@@ -65187,7 +65188,7 @@ var MapchartComponent = /** @class */ (function () {
             d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#total-state').html(self.formatValueSeperator(self.totalState));
             d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#total-state-deaths').html(self.formatValueSeperator(self.totalDeathState));
             if (byDensity === true) {
-                d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#name-total-state').html('Incidência ' + self.selectedState);
+                d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#name-total-state').html(self.selectedState + ' per 100,000');
             }
             else {
                 d3__WEBPACK_IMPORTED_MODULE_1__["select"]('#name-total-state').html('Cases ' + self.selectedState);
@@ -65327,7 +65328,7 @@ var MapchartComponent = /** @class */ (function () {
                     .range([0, gridSizeX * (qtyDays - 0.9)]));
                 var titleLabel = 'Cases ';
                 if (byDensity === true) {
-                    titleLabel = 'Incidência ';
+                    titleLabel = 'Per 100,000';
                 }
                 var scaleValue = Math.min((0.5 * height) / 150, (0.5 * width) / 150);
                 svg.append('text')
@@ -65652,7 +65653,7 @@ var MapchartComponent = /** @class */ (function () {
                     .range([0, gridSizeX * (qtyDays - 0.9)]));
                 var titleLabel = 'Cases ';
                 if (byDensity === true) {
-                    titleLabel = 'Incidência ';
+                    titleLabel = 'Per 100,000';
                 }
                 var scaleValue = Math.min((0.5 * height) / 150, (0.5 * width) / 150);
                 svg.append('text')
