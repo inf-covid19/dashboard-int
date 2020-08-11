@@ -803,16 +803,16 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
           let labelTot = '';
           const qtyTotal = (typeof TotalReport.get(d.properties.UF_05) === 'undefined' ? 0 : self.formatValueSeperator(TotalReport.get(d.properties.UF_05)))
             if (byDensity === true) {
-              labelTot = 'Incidência casos';
+              labelTot = 'Incidência cases';
             } else {
-              labelTot = 'Total casos';
+              labelTot = 'Total cases';
             }
           let labelTotDeath = '';
           const qtyTotalDeath = (typeof TotalDeathReport.get(d.properties.UF_05) === 'undefined' ? 0 : self.formatValueSeperator(TotalDeathReport.get(d.properties.UF_05)))
           if (byDensity === true) {
             labelTotDeath = 'Incidência óbitos';
           } else {
-            labelTotDeath = 'Total óbitos';
+            labelTotDeath = 'Total deaths';
           }
 
           return (
@@ -826,7 +826,7 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
             '<text>' + labelTotDeath + ': </text><text style="font-weight: 800">' +
             qtyTotalDeath +
             '</text><br/>' +
-            '<text>População: </text><text style="font-weight: 800">' +
+            '<text>Population: </text><text style="font-weight: 800">' +
               d3.format(',d')(self.population[d.properties.UF_05].population) +
             '</text><br/>' +
             '</div>'
@@ -888,7 +888,7 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
       .attr('text-anchor', 'start')
       .attr('font-size', '23px')
       .attr('font-weight', 'bold')
-      .text('Casos');
+      .text('Cases');
 
     const currentScale = Math.min(scaleValue, (0.5 * height) / 200);
     let lastTick = 0;
@@ -923,9 +923,9 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
       d3.select('#total-country-deaths').html( self.formatValueSeperator(self.totalDeathCountry) );
 
     if (byDensity === true) {
-      d3.select('#name-total-country').html('Incidência Brasil');
+      d3.select('#name-total-country').html('Incidência Brazil');
     } else {
-      d3.select('#name-total-country').html('Confirmados Brasil');
+      d3.select('#name-total-country').html('Cases Brazil');
     }
 
     const statesRankingElmnt = d3.select('#states-ranking');
@@ -1164,8 +1164,8 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
         d3.select(this).attr('stroke', self.lineStrongerBorderColor);
         d3.select(this).attr('stroke-width', 3);
         // d3.select(this).attr('stroke', '#ED881A');
-        const labelTot = byDensity === true ? 'Incidência casos' : 'Total casos';
-        const labelTotDeath = byDensity === true ? 'Incidência óbitos' : 'Total óbitos';
+        const labelTot = byDensity === true ? 'Incidência cases' : 'Total cases';
+        const labelTotDeath = byDensity === true ? 'Incidência deaths' : 'Total deaths';
         return (
           // '<div style="opacity:0.8;background-color:#8b0707;padding:7px;color:white">' +
           '<div style="opacity:0.8;background-color:#253494;padding:7px;color:white">' +
@@ -1182,7 +1182,7 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
               ? 0
               : self.formatValueSeperator(TotalDeathReport.get(d.properties.COD_IBGE))) +
           '</text><br/>' +
-          '<text>População: </text><text style="font-weight: 800">' +
+          '<text>Population: </text><text style="font-weight: 800">' +
           d3.format(',d')(self.population[d.properties.UF]['municipios'][d.properties.COD_IBGE]) +
           '</text><br/>' +
           '</div>'
@@ -1244,7 +1244,7 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
       .attr('text-anchor', 'start')
       .attr('font-size', '22px')
       .attr('font-weight', 'bold')
-      .text('Casos');
+      .text('Cases');
 
     let lastTick = 0;
     const currentScale = Math.min(scaleValue, (0.5 * height) / 200);
@@ -1281,7 +1281,7 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
     if (byDensity === true) {
       d3.select('#name-total-state').html('Incidência ' + self.selectedState);
     } else {
-      d3.select('#name-total-state').html('Confirmados ' + self.selectedState);
+      d3.select('#name-total-state').html('Cases ' + self.selectedState);
     }
 
 
@@ -1421,7 +1421,7 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
       const x = d3.axisBottom().tickFormat(d3.timeFormat('%d/%m')).scale(d3.scaleTime()
               .domain([d3.timeParse('%Y-%m-%d')(self.iniSelectedDay), d3.timeParse('%Y-%m-%d')(self.endSelectedDay)])
               .range([0, gridSizeX * (qtyDays - 0.9)]));
-      let titleLabel = 'Casos confirmados ';
+      let titleLabel = 'Cases ';
       if (byDensity === true) {
         titleLabel = 'Incidência ';
       }
@@ -1435,7 +1435,7 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
           .style('font-size', 'min(calc(2vh), calc(1.5vw))')
           // .style('font-size', 15)
           .style('font-weight', 'bold')
-          .text(titleLabel + ' por estado');
+          .text(titleLabel + ' by state');
 
       g.append('g')
           .attr('class', 'x-axis')
@@ -1758,7 +1758,7 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
       const x = d3.axisBottom().tickFormat(d3.timeFormat('%d/%m')).scale(d3.scaleTime()
           .domain([d3.timeParse('%Y-%m-%d')(self.iniSelectedDay), d3.timeParse('%Y-%m-%d')(self.endSelectedDay)])
           .range([0, gridSizeX * (qtyDays - 0.9)]));
-      let titleLabel = 'Casos confirmados ';
+      let titleLabel = 'Cases ';
       if (byDensity === true) {
         titleLabel = 'Incidência ';
       }
@@ -1772,7 +1772,7 @@ export class MapchartComponent implements OnInit, AfterViewInit, OnDestroy {
           .style('font-size', 'min(calc(2vh), calc(1.5vw))')
           // .style('font-size', 15)
           .style('font-weight', 'bold')
-          .text(titleLabel + 'por município no ' + self.selectedState);
+          .text(titleLabel + 'by city in ' + self.selectedState);
 
       g.append('g')
           .attr('class', 'x-axis')
